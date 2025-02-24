@@ -5,3 +5,9 @@ transformers
 accelerate
 openai
 dotenv
+pandas
+gcsfs
+scikit-learn
+google-cloud-storage
+numpy
+fuzzywuzzy

@@ -4,7 +4,10 @@ import os
 import streamlit as st
 import time  # For simulating real-time progress updates
 
-def translate(folder_name):
+
+
+@st.cache_resource
+def load_model():
     device = "cuda:0" if torch.cuda.is_available() else "cpu"
     torch_dtype = torch.float16 if torch.cuda.is_available() else torch.float32
 
@@ -19,6 +22,13 @@ def translate(folder_name):
 
     processor = AutoProcessor.from_pretrained(model_id)
 
+    return model, processor, device, torch_dtype
+
+
+
+
+def translate(folder_name):
+    model, processor, device, torch_dtype = load_model()
     pipe = pipeline(
         "automatic-speech-recognition",
         model=model,
