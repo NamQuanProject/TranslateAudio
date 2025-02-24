@@ -6,6 +6,13 @@ from translate import translate
 from combine import combine
 from openai import OpenAI
 from dotenv import load_dotenv
+import asyncio
+
+try:
+    asyncio.get_running_loop()
+except RuntimeError:
+    asyncio.set_event_loop(asyncio.new_event_loop())
+
 
 load_dotenv()
 st.title("🎙️ Audio Upload & Transcription")
